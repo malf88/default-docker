@@ -12,11 +12,11 @@ composer="docker-compose -f docker-compose-util.yml"
 
 
 artisan_cmd(){
-    $docker_compose run --rm app "$@"
+    $docker_compose run --rm app php "$@"
 }
 
 test_cmd(){
-    $docker_compose run --rm app artisan "$@"
+    $docker_compose run --rm app php artisan "$@"
 }
 
 docker_compose_up(){
