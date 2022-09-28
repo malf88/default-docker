@@ -34,7 +34,7 @@ docker_compose_down(){
 }
 
 composer_build(){
-    $composer build
+    $composer build composer
 }
 
 composer_cmd(){
@@ -43,7 +43,7 @@ composer_cmd(){
 }
 
 npm_build(){
-    $node build
+    $node build node
 }
 
 npm_cmd(){
