@@ -33,7 +33,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
         zip && \
     pecl install redis && \
     docker-php-ext-enable redis &&\sed -i "s/CipherString = .*$/#CipherString/" /etc/ssl/openssl.cnf && \
-    chmod +x /usr/local/bin/start && \
+    chmod +x /usr/local/bin/entrypoint.sh && \
     chown -R www-data:www-data /var/www
 
  RUN php artisan config:clear && \
