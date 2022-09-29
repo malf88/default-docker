@@ -2,7 +2,7 @@ FROM php:8.1-fpm
 
 WORKDIR /var/www
 ENV CURL_CA_BUNDLE /usr/lib/ssl/certs/ca-certificates.crt
-
+ARG USERID=1000
 COPY ./ /var/www/
 
 ENV TZ=America/Sao_Paulo
@@ -33,7 +33,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
         zip && \
     pecl install redis && \
     docker-php-ext-enable redis &&\sed -i "s/CipherString = .*$/#CipherString/" /etc/ssl/openssl.cnf && \
-    chmod +x /usr/local/bin/start && \
+    chmod +x /usr/local/bin/entrypoint.sh && \
     chown -R www-data:www-data /var/www
 
  RUN php artisan config:clear && \
@@ -47,5 +47,5 @@ COPY ./docker/supervisor/conf.d /etc/supervisor/conf.d
 
 RUN if [ "${CONTAINER_ROLE}" = "scheduler" ]; then service supervisor stop && service supervisor start  && supervisorctl reread && supervisorctl update && service supervisor restart horizon; fi
 
-USER www-data
+USER ${USERID}
 CMD ["/usr/local/bin/entrypoint.sh"]
