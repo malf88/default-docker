@@ -12,11 +12,11 @@ composer="docker-compose -f docker-compose-util.yml"
 
 
 artisan_cmd(){
-    $docker_compose run --rm app "$@"
+    $docker_compose run --rm app php "$@"
 }
 
 test_cmd(){
-    $docker_compose run --rm app artisan "$@"
+    $docker_compose run --rm app php artisan "$@"
 }
 
 docker_compose_up(){
@@ -34,7 +34,7 @@ docker_compose_down(){
 }
 
 composer_build(){
-    $composer build
+    $composer build composer
 }
 
 composer_cmd(){
@@ -43,7 +43,7 @@ composer_cmd(){
 }
 
 npm_build(){
-    $node build
+    $node build node
 }
 
 npm_cmd(){
