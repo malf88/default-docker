@@ -40,7 +40,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
      php artisan cache:clear && \
      php artisan storage:link
 
-RUN if [ "${APP_ENV}" = "local" ]; then pecl install xdebug && docker-php-ext-enable xdebug && pear config-set php_ini /usr/local/etc/php/php.ini; fi
+RUN if [ "$BUILD_APP_ENV" = "local" ]; then pecl install xdebug && docker-php-ext-enable xdebug && pear config-set php_ini /usr/local/etc/php/php.ini; fi
 
 COPY ./docker/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ./docker/supervisor/conf.d /etc/supervisor/conf.d
